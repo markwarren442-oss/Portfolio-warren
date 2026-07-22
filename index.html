@@ -89,6 +89,15 @@
             background: var(--accent);
         }
 
+        /* Cursor on dark sections — switch to gold so it stays visible */
+        body.cursor-dark #cursor-dot {
+            background: var(--accent);
+        }
+
+        body.cursor-dark #cursor-ring {
+            border-color: rgba(200, 169, 110, .6);
+        }
+
         /* ── PAGE WIPE ── */
         #page-wipe {
             position: fixed;
@@ -163,9 +172,7 @@
             transition: transform .5s var(--ease-expo), box-shadow .3s;
         }
 
-        nav.nav-hide {
-            transform: translateY(-100%);
-        }
+        /* nav-hide removed — navbar is always visible while scrolling */
 
         .nav-inner {
             max-width: 1200px;
@@ -482,7 +489,7 @@
 
         .hero-badge:hover {
             background: #222;
-            box-shadow: 0 12px 40px rgba(0,0,0,.35);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
         }
 
         .hero-badge.show {
@@ -652,7 +659,7 @@
         }
 
         .info-modal-tag.gold {
-            background: rgba(200,169,110,.12);
+            background: rgba(200, 169, 110, .12);
             border-color: var(--accent);
             color: var(--accent);
         }
@@ -1321,10 +1328,10 @@
             max-width: 420px;
             padding: 52px 40px 40px;
             text-align: center;
-            box-shadow: 0 32px 80px rgba(0,0,0,.28), 0 0 0 1px var(--line);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, .28), 0 0 0 1px var(--line);
             transform: scale(.82) translateY(40px);
             opacity: 0;
-            transition: transform .55s cubic-bezier(0.16,1,0.3,1), opacity .4s ease;
+            transition: transform .55s cubic-bezier(0.16, 1, 0.3, 1), opacity .4s ease;
             overflow: hidden;
         }
 
@@ -1348,7 +1355,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background .2s, transform .3s cubic-bezier(0.16,1,0.3,1);
+            transition: background .2s, transform .3s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 2;
         }
 
@@ -1385,7 +1392,9 @@
         }
 
         @keyframes rdl-spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         #rdl-icon {
@@ -1399,12 +1408,21 @@
             font-size: 2.6rem;
             color: var(--accent);
             animation: rdl-pulse 1.6s ease-in-out infinite;
-            box-shadow: 0 8px 28px rgba(0,0,0,.2);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .2);
         }
 
         @keyframes rdl-pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
-            50%       { transform: scale(1.06); box-shadow: 0 12px 36px rgba(200,169,110,.25); }
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 8px 28px rgba(0, 0, 0, .2);
+            }
+
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 12px 36px rgba(200, 169, 110, .25);
+            }
         }
 
         /* ── Text ── */
@@ -1463,7 +1481,7 @@
             top: 0;
             bottom: 0;
             width: 40px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,.35));
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35));
             border-radius: 99px;
         }
 
@@ -1484,7 +1502,7 @@
             opacity: 0;
             pointer-events: none;
             transform: translateY(10px);
-            transition: opacity .4s ease, transform .4s cubic-bezier(0.16,1,0.3,1);
+            transition: opacity .4s ease, transform .4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             z-index: 1;
         }
@@ -1532,11 +1550,17 @@
             align-items: center;
             justify-content: center;
             padding: 24px;
-            background: rgba(17,17,17,0);
+            background: rgba(17, 17, 17, 0);
             transition: background .4s;
         }
-        #contact-modal.cm-open  { display: flex; }
-        #contact-modal.cm-visible { background: rgba(17,17,17,.65); }
+
+        #contact-modal.cm-open {
+            display: flex;
+        }
+
+        #contact-modal.cm-visible {
+            background: rgba(17, 17, 17, .65);
+        }
 
         #contact-modal-blur {
             position: absolute;
@@ -1544,7 +1568,10 @@
             backdrop-filter: blur(0px);
             transition: backdrop-filter .4s;
         }
-        #contact-modal.cm-visible #contact-modal-blur { backdrop-filter: blur(10px); }
+
+        #contact-modal.cm-visible #contact-modal-blur {
+            backdrop-filter: blur(10px);
+        }
 
         #contact-modal-box {
             background: var(--paper);
@@ -1561,6 +1588,7 @@
             transition: transform .55s var(--ease-expo), opacity .4s ease;
             border-top: 3px solid var(--accent);
         }
+
         #contact-modal.cm-visible #contact-modal-box {
             transform: translateY(0) scale(1);
             opacity: 1;
@@ -1583,7 +1611,11 @@
             color: var(--ink-2);
             transition: background .2s, color .2s;
         }
-        #contact-modal-close:hover { background: var(--accent); color: #fff; }
+
+        #contact-modal-close:hover {
+            background: var(--accent);
+            color: #fff;
+        }
 
         .cm-header-label {
             font-size: .7rem;
@@ -1594,12 +1626,14 @@
             font-weight: 600;
             margin-bottom: 10px;
         }
+
         .cm-header-title {
             font-family: var(--serif);
             font-size: 2rem;
             color: var(--ink);
             margin-bottom: 6px;
         }
+
         .cm-header-sub {
             font-size: .875rem;
             color: var(--ink-3);
@@ -1609,6 +1643,7 @@
         .cm-field {
             margin-bottom: 20px;
         }
+
         .cm-field label {
             display: block;
             font-size: .75rem;
@@ -1618,6 +1653,7 @@
             color: var(--ink-2);
             margin-bottom: 7px;
         }
+
         .cm-field input,
         .cm-field textarea,
         .cm-field select {
@@ -1633,16 +1669,29 @@
             transition: border-color .25s, box-shadow .25s;
             resize: vertical;
         }
+
         .cm-field input:focus,
         .cm-field textarea:focus,
         .cm-field select:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(200,169,110,.15);
+            box-shadow: 0 0 0 3px rgba(200, 169, 110, .15);
         }
-        .cm-field textarea { min-height: 130px; }
 
-        .cm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 480px) { .cm-row { grid-template-columns: 1fr; } }
+        .cm-field textarea {
+            min-height: 130px;
+        }
+
+        .cm-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .cm-row {
+                grid-template-columns: 1fr;
+            }
+        }
 
         #cm-submit {
             width: 100%;
@@ -1657,7 +1706,11 @@
             text-align: center;
             padding: 24px 0 8px;
         }
-        #cm-success.cm-show { display: flex; }
+
+        #cm-success.cm-show {
+            display: flex;
+        }
+
         .cm-success-icon {
             width: 64px;
             height: 64px;
@@ -1670,11 +1723,13 @@
             color: #fff;
             margin-bottom: 20px;
         }
+
         .cm-success-title {
             font-family: var(--serif);
             font-size: 1.6rem;
             margin-bottom: 8px;
         }
+
         .cm-success-sub {
             font-size: .9rem;
             color: var(--ink-3);
@@ -1766,7 +1821,8 @@
                 <img src="PERSONAL/My image.JPG" alt="Mark Warren Flores">
             </div>
             <div class="hero-badge" id="hero-badge" onclick="openInfoModal('school')" title="Click to learn more">
-                <span><i class='bx bx-buildings'></i></span>UE Manila<br><small style="font-size:.6rem;letter-spacing:.08em;opacity:.8">Quezon City</small>
+                <span><i class='bx bx-buildings'></i></span>UE Manila<br><small
+                    style="font-size:.6rem;letter-spacing:.08em;opacity:.8">Quezon City</small>
             </div>
         </div>
     </section>
@@ -1812,12 +1868,14 @@
                         <div class="stat-label">Degree Background</div>
                         <div class="stat-hint">BS Info. Technology · tap for details</div>
                     </div>
-                    <div class="stat-box stat-clickable" onclick="openInfoModal('location')" title="Click to learn more">
+                    <div class="stat-box stat-clickable" onclick="openInfoModal('location')"
+                        title="Click to learn more">
                         <div class="stat-num">PH</div>
                         <div class="stat-label">Based in Quezon City</div>
                         <div class="stat-hint">Philippines · tap for details</div>
                     </div>
-                    <div class="stat-box stat-clickable" onclick="openInfoModal('experience')" title="Click to learn more">
+                    <div class="stat-box stat-clickable" onclick="openInfoModal('experience')"
+                        title="Click to learn more">
                         <div class="stat-num"><i class='bx bx-id-card' style="font-size:2rem"></i></div>
                         <div class="stat-label">Internship</div>
                         <div class="stat-hint">Div. Office QC · tap for details</div>
@@ -1922,9 +1980,10 @@
         <div class="contact-inner" data-reveal="up">
             <p class="section-label">Get In Touch</p>
             <h2 class="contact-title">Let's work<br><em>together.</em></h2>
-            <p class="contact-sub">Based in Mindoro, Philippines. Available for freelance and remote opportunities
+            <p class="contact-sub">Available for freelance and remote opportunities
                 worldwide.</p>
-            <button onclick="openContactModal()" class="btn btn-gold" id="contact-send-btn" style="border:none;cursor:pointer;">
+            <button onclick="openContactModal()" class="btn btn-gold" id="contact-send-btn"
+                style="border:none;cursor:pointer;">
                 <span class="btn-shimmer"></span>
                 Send a Message <i class='bx bx-send'></i>
             </button>
@@ -1967,7 +2026,8 @@
             <div id="cm-form-view">
                 <p class="cm-header-label">Get In Touch</p>
                 <h2 class="cm-header-title" id="cm-title">Send a Message</h2>
-                <p class="cm-header-sub">Fill in the form below and your default email app will open with everything pre-filled — just hit Send.</p>
+                <p class="cm-header-sub">Fill in the form below and your default email app will open with everything
+                    pre-filled — just hit Send.</p>
 
                 <div class="cm-row">
                     <div class="cm-field">
@@ -1995,7 +2055,8 @@
                 <button onclick="submitContactForm()" class="btn btn-gold" id="cm-submit">
                     <span class="btn-shimmer"></span>
                     <span id="cm-btn-label"><i class='bx bx-send'></i> Send Message</span>
-                    <span id="cm-btn-loading" style="display:none;"><i class='bx bx-loader-alt' style="animation:cm-spin .8s linear infinite"></i> Sending…</span>
+                    <span id="cm-btn-loading" style="display:none;"><i class='bx bx-loader-alt'
+                            style="animation:cm-spin .8s linear infinite"></i> Sending…</span>
                 </button>
             </div>
 
@@ -2003,7 +2064,9 @@
             <div id="cm-success">
                 <div class="cm-success-icon"><i class='bx bx-check'></i></div>
                 <p class="cm-success-title">Email Ready!</p>
-                <p class="cm-success-sub">Your email client has opened with the message pre-filled. Just review and hit <strong>Send</strong> — I'll get back to you within 24 hours.</p>
+                <p class="cm-success-sub">Your email client has opened with the message pre-filled. Just review and hit
+                    <strong>Send</strong> — I'll get back to you within 24 hours.
+                </p>
             </div>
         </div>
     </div>
@@ -2012,7 +2075,8 @@
     <div id="resume-modal" aria-modal="true" role="dialog">
         <div id="resume-modal-backdrop" onclick="closeResumeModal()"></div>
         <div id="resume-modal-box">
-            <button id="resume-modal-close" onclick="closeResumeModal()" aria-label="Close"><i class='bx bx-x'></i></button>
+            <button id="resume-modal-close" onclick="closeResumeModal()" aria-label="Close"><i
+                    class='bx bx-x'></i></button>
 
             <!-- Particle canvas -->
             <canvas id="resume-confetti"></canvas>
@@ -2066,13 +2130,19 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
 
+        /* Switch cursor to gold on dark (black) sections */
+        document.querySelectorAll('#contact, footer').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-dark'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-dark'));
+        });
+
         /* ══════════════════════════════════
            2. PAGE WIPE SYSTEM
         ══════════════════════════════════ */
         const strips = document.querySelectorAll('.wipe-strip');
         let wiping = false;
 
-        /* On load: strips start scaleY(1), then retract upward */
+        /* On load: strips start scaleY(1), then retract upward after page is fully loaded */
         (function initLoad() {
             strips.forEach(s => {
                 s.style.transition = 'none';
@@ -2080,24 +2150,44 @@
                 s.style.transformOrigin = 'top';
             });
 
-            // Small frame delay then animate out
-            requestAnimationFrame(() => requestAnimationFrame(() => {
-                strips.forEach((s, i) => {
-                    s.style.transition = `transform 0.65s cubic-bezier(0.16,1,0.3,1) ${i * 55}ms`;
-                    s.style.transform = 'scaleY(0)';
-                });
+            function revealPage() {
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    strips.forEach((s, i) => {
+                        s.style.transition = `transform 0.65s cubic-bezier(0.16,1,0.3,1) ${i * 55}ms`;
+                        s.style.transform = 'scaleY(0)';
+                    });
 
-                // Trigger hero animations after wipe clears
-                setTimeout(animateHeroIn, 280);
-                // Image curtain
-                setTimeout(() => {
-                    document.getElementById('img-curtain').style.transform = 'scaleY(0)';
-                }, 480);
-                // Badge
-                setTimeout(() => {
-                    document.getElementById('hero-badge').classList.add('show');
-                }, 750);
-            }));
+                    // Trigger hero animations after wipe clears
+                    setTimeout(animateHeroIn, 280);
+                    // Image curtain
+                    setTimeout(() => {
+                        const curtain = document.getElementById('img-curtain');
+                        if (curtain) curtain.style.transform = 'scaleY(0)';
+                    }, 480);
+                    // Badge
+                    setTimeout(() => {
+                        const badge = document.getElementById('hero-badge');
+                        if (badge) badge.classList.add('show');
+                    }, 750);
+                }));
+            }
+
+            // Wait for fonts + images to fully load so the wipe never gets "stuck" black.
+            // A safety timeout ensures the page always reveals even in VS Code preview
+            // or local file:// environments where 'load' may not fire as expected.
+            let revealed = false;
+            function safeReveal() {
+                if (revealed) return;
+                revealed = true;
+                revealPage();
+            }
+            if (document.readyState === 'complete') {
+                safeReveal();
+            } else {
+                window.addEventListener('load', safeReveal, { once: true });
+                // Fallback: force reveal after 300ms no matter what
+                setTimeout(safeReveal, 300);
+            }
         })();
 
         function wipeTransition(callback) {
@@ -2215,14 +2305,6 @@
             if (curr > 10) navbar.style.boxShadow = '0 1px 12px rgba(0,0,0,.06)';
             else navbar.style.boxShadow = 'none';
 
-            // Don't hide during wipe transitions
-            if (navLocked) {
-                lastScroll = curr;
-                return;
-            }
-
-            if (curr > lastScroll + 12 && curr > 150) navbar.classList.add('nav-hide');
-            else if (curr < lastScroll - 6) navbar.classList.remove('nav-hide');
             lastScroll = curr;
         }, { passive: true });
 
@@ -2504,21 +2586,21 @@
         function openResumeModal(e) {
             e && e.preventDefault();
             const modal = document.getElementById('resume-modal');
-            const fill  = document.getElementById('rdl-bar-fill');
-            const pct   = document.getElementById('rdl-bar-pct');
+            const fill = document.getElementById('rdl-bar-fill');
+            const pct = document.getElementById('rdl-bar-pct');
             const label = document.getElementById('rdl-label');
-            const icon  = document.getElementById('rdl-icon');
-            const ring  = document.getElementById('rdl-icon-ring');
-            const cta   = document.getElementById('rdl-cta');
-            const note  = document.getElementById('rdl-note');
+            const icon = document.getElementById('rdl-icon');
+            const ring = document.getElementById('rdl-icon-ring');
+            const cta = document.getElementById('rdl-cta');
+            const note = document.getElementById('rdl-note');
 
             // Reset state
             fill.style.width = '0%';
-            pct.textContent  = '0%';
+            pct.textContent = '0%';
             label.textContent = 'Preparing your resume\u2026';
-            icon.className   = '';
-            icon.innerHTML   = '<i class=\'bx bxs-file-pdf\'></i>';
-            ring.className   = '';
+            icon.className = '';
+            icon.innerHTML = '<i class=\'bx bxs-file-pdf\'></i>';
+            ring.className = '';
             cta.classList.remove('rdl-ready');
             note.classList.remove('rdl-ready');
 
@@ -2540,7 +2622,7 @@
                 if (raw < 1) progress = Math.round((1 - Math.pow(1 - raw, 2.4)) * 100);
 
                 fill.style.width = progress + '%';
-                pct.textContent  = progress + '%';
+                pct.textContent = progress + '%';
 
                 if (progress >= 60 && label.textContent !== 'Almost ready\u2026')
                     label.textContent = 'Almost ready\u2026';
@@ -2550,7 +2632,7 @@
                 } else {
                     // Completed!
                     fill.style.width = '100%';
-                    pct.textContent  = '100%';
+                    pct.textContent = '100%';
                     label.textContent = 'Ready to download!';
 
                     // Swap icon to green check
@@ -2588,14 +2670,14 @@
         /* ── Canvas confetti ── */
         function startConfetti() {
             const canvas = document.getElementById('resume-confetti');
-            const ctx    = canvas.getContext('2d');
-            const box    = document.getElementById('resume-modal-box');
-            canvas.width  = box.offsetWidth;
+            const ctx = canvas.getContext('2d');
+            const box = document.getElementById('resume-modal-box');
+            canvas.width = box.offsetWidth;
             canvas.height = box.offsetHeight;
 
-            const COLORS = ['#c8a96e','#e8c97a','#fff','#f0e6d0','#111111'];
+            const COLORS = ['#c8a96e', '#e8c97a', '#fff', '#f0e6d0', '#111111'];
             const particles = Array.from({ length: 72 }, () => ({
-                x: canvas.width  * (.3 + Math.random() * .4),
+                x: canvas.width * (.3 + Math.random() * .4),
                 y: canvas.height * .28,
                 vx: (Math.random() - .5) * 9,
                 vy: -(4 + Math.random() * 6),
@@ -2611,17 +2693,17 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 let alive = false;
                 particles.forEach(p => {
-                    p.x   += p.vx;
-                    p.y   += p.vy;
-                    p.vy  += .28;          // gravity
-                    p.vx  *= .98;          // air resistance
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += .28;          // gravity
+                    p.vx *= .98;          // air resistance
                     p.alpha = Math.max(0, p.alpha - .013);
-                    p.rot  += p.rotV;
+                    p.rot += p.rotV;
                     if (p.alpha <= 0) return;
                     alive = true;
                     ctx.save();
                     ctx.globalAlpha = p.alpha;
-                    ctx.fillStyle   = p.color;
+                    ctx.fillStyle = p.color;
                     ctx.translate(p.x, p.y);
                     ctx.rotate(p.rot * Math.PI / 180);
                     if (p.shape === 'rect') {
@@ -2679,11 +2761,11 @@
         })();
 
         function submitContactForm() {
-            const name    = document.getElementById('cm-name').value.trim();
-            const email   = document.getElementById('cm-email').value.trim();
+            const name = document.getElementById('cm-name').value.trim();
+            const email = document.getElementById('cm-email').value.trim();
             const subject = document.getElementById('cm-subject').value.trim();
             const message = document.getElementById('cm-message').value.trim();
-            const errEl   = document.getElementById('cm-error');
+            const errEl = document.getElementById('cm-error');
 
             // Reset error
             errEl.style.display = 'none';
@@ -2706,12 +2788,12 @@
             }
 
             // Show loading
-            const btn      = document.getElementById('cm-submit');
+            const btn = document.getElementById('cm-submit');
             const btnLabel = document.getElementById('cm-btn-label');
-            const btnLoad  = document.getElementById('cm-btn-loading');
-            btn.disabled          = true;
+            const btnLoad = document.getElementById('cm-btn-loading');
+            btn.disabled = true;
             btnLabel.style.display = 'none';
-            btnLoad.style.display  = 'inline';
+            btnLoad.style.display = 'inline';
 
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
@@ -2725,23 +2807,23 @@
                     botcheck: ''
                 })
             })
-            .then(r => r.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('cm-form-view').style.display = 'none';
-                    document.getElementById('cm-success').classList.add('cm-show');
-                } else {
-                    throw new Error(data.message || 'Send failed');
-                }
-            })
-            .catch(err => {
-                btn.disabled          = false;
-                btnLabel.style.display = 'inline';
-                btnLoad.style.display  = 'none';
-                errEl.textContent = 'Could not send. Please email markwarren442@gmail.com directly.';
-                errEl.style.display = 'block';
-                console.error('Web3Forms error:', err);
-            });
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('cm-form-view').style.display = 'none';
+                        document.getElementById('cm-success').classList.add('cm-show');
+                    } else {
+                        throw new Error(data.message || 'Send failed');
+                    }
+                })
+                .catch(err => {
+                    btn.disabled = false;
+                    btnLabel.style.display = 'inline';
+                    btnLoad.style.display = 'none';
+                    errEl.textContent = 'Could not send. Please email markwarren442@gmail.com directly.';
+                    errEl.style.display = 'block';
+                    console.error('Web3Forms error:', err);
+                });
         }
 
         // Close on Escape
