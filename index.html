@@ -612,7 +612,8 @@
         /* ── INFO MODAL (school/course/etc.) ── */
         .info-modal-photo {
             width: 100%;
-            height: 200px;
+            height: auto;
+            min-height: 200px;
             background: var(--paper-2);
             border-radius: 4px;
             display: flex;
@@ -624,11 +625,92 @@
             position: relative;
         }
 
+        .info-modal-photo:has(img) {
+            border: none;
+            background: transparent;
+        }
+
         .info-modal-photo img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
             border-radius: 4px;
+        }
+
+        /* ── CERT PHOTO SCROLL STRIP ── */
+        .cert-photo-strip {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 4px 2px 12px;
+            margin-bottom: 24px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--paper-2);
+        }
+
+        .cert-photo-strip::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .cert-photo-strip::-webkit-scrollbar-track {
+            background: var(--paper-2);
+            border-radius: 4px;
+        }
+
+        .cert-photo-strip::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .cert-photo-item {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: var(--paper-2);
+            position: relative;
+        }
+
+        .cert-photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 7px;
+            cursor: zoom-in;
+            transition: transform .3s var(--ease-expo);
+        }
+
+        .cert-photo-item img:hover {
+            transform: scale(1.02);
+        }
+
+        .cert-photo-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(17,17,17,.75));
+            color: #fff;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 20px 14px 10px;
+            border-radius: 0 0 7px 7px;
+        }
+
+        .cert-strip-hint {
+            font-size: .72rem;
+            color: var(--ink-3);
+            text-align: center;
+            margin: -16px 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         .info-modal-photo-label {
@@ -909,6 +991,277 @@
             to {
                 transform: translateX(-50%);
             }
+        }
+
+        /* ── CERTIFICATIONS ── */
+        #certifications {
+            background: var(--paper-2);
+            padding: 120px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .cert-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all .35s var(--ease-expo);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .08);
+        }
+
+        .cert-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 230px;
+            background: #111;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform .5s var(--ease-expo);
+        }
+
+        .cert-card:hover .cert-img-wrap img {
+            transform: scale(1.06);
+        }
+
+        .cert-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 17, 17, .65);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .3s var(--ease-expo);
+        }
+
+        .cert-card:hover .cert-overlay {
+            opacity: 1;
+        }
+
+        .cert-zoom-btn {
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transform: translateY(10px);
+            transition: transform .3s var(--ease-expo);
+        }
+
+        .cert-card:hover .cert-zoom-btn {
+            transform: translateY(0);
+        }
+
+        .cert-content {
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .cert-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cert-tag {
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+
+        .cert-badge-pill {
+            background: var(--paper-2);
+            border: 1px solid var(--line);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: .72rem;
+            font-weight: 600;
+            color: var(--ink);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cert-title {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            color: var(--ink);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .cert-desc {
+            font-size: .88rem;
+            line-height: 1.65;
+            color: var(--ink-2);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .cert-footer {
+            border-top: 1px solid var(--line);
+            padding-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--ink-3);
+        }
+
+        .cert-link-text {
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: transform .2s;
+        }
+
+        .cert-card:hover .cert-link-text {
+            transform: translateX(3px);
+        }
+
+        /* ── CERTIFICATE LIGHTBOX MODAL ── */
+        #cert-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9900;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity .35s var(--ease-expo);
+        }
+
+        #cert-lightbox.cl-open {
+            display: flex;
+        }
+
+        #cert-lightbox.cl-visible {
+            opacity: 1;
+        }
+
+        #cert-lightbox-blur {
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 17, 17, .85);
+            backdrop-filter: blur(12px);
+        }
+
+        #cert-lightbox-box {
+            position: relative;
+            z-index: 2;
+            background: var(--paper);
+            max-width: 920px;
+            width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .4);
+            transform: scale(.94);
+            transition: transform .35s var(--ease-expo);
+        }
+
+        #cert-lightbox.cl-visible #cert-lightbox-box {
+            transform: scale(1);
+        }
+
+        #cert-lightbox-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--paper-2);
+        }
+
+        #cert-lightbox-title {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            color: var(--ink);
+        }
+
+        #cert-lightbox-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--ink-2);
+            cursor: pointer;
+            transition: color .2s;
+        }
+
+        #cert-lightbox-close:hover {
+            color: var(--accent);
+        }
+
+        #cert-lightbox-body {
+            padding: 24px;
+            overflow-y: auto;
+            text-align: center;
+            background: #0f0f0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cert-lightbox-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 65vh;
+            border-radius: 6px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, .6);
+        }
+
+        #cert-lightbox-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--line);
+            background: var(--paper);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         /* ── CONTACT ── */
@@ -1764,6 +2117,7 @@
         <div class="s-dot" data-target="about"></div>
         <div class="s-dot" data-target="services"></div>
         <div class="s-dot" data-target="portfolio"></div>
+        <div class="s-dot" data-target="certifications"></div>
         <div class="s-dot" data-target="contact"></div>
     </div>
 
@@ -1780,6 +2134,8 @@
                             class="nav-hidden">Services</span></a></li>
                 <li><a href="#portfolio" id="nl-3"><span class="nav-visible">Projects</span><span
                             class="nav-hidden">Projects</span></a></li>
+                <li><a href="#certifications" id="nl-4"><span class="nav-visible">Certifications</span><span
+                            class="nav-hidden">Certifications</span></a></li>
             </ul>
             <a href="#contact" class="nav-cta" id="nav-cta">Let's Talk</a>
         </div>
@@ -1805,13 +2161,13 @@
                 </a>
             </div>
             <div class="hero-socials" id="h-socials">
-                <a href="https://facebook.com/YOUR-FACEBOOK" target="_blank" class="soc-link"><i
+                <a href="https://www.facebook.com/mark.warren.l.flores/" target="_blank" class="soc-link"><i
                         class='bx bxl-facebook'></i></a>
-                <a href="https://instagram.com/YOUR-INSTAGRAM" target="_blank" class="soc-link"><i
+                <a href="https://www.instagram.com/th3_warren/" target="_blank" class="soc-link"><i
                         class='bx bxl-instagram'></i></a>
-                <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" class="soc-link"><i
+                <a href="https://www.linkedin.com/in/mark-warren-flores-abb235264/" target="_blank" class="soc-link"><i
                         class='bx bxl-linkedin'></i></a>
-                <a href="https://wa.me/63XXXXXXXXXX" target="_blank" class="soc-link"><i
+                <a href="https://wa.me/639664786892" target="_blank" class="soc-link"><i
                         class='bx bxl-whatsapp'></i></a>
             </div>
         </div>
@@ -1868,11 +2224,10 @@
                         <div class="stat-label">Degree Background</div>
                         <div class="stat-hint">BS Info. Technology · tap for details</div>
                     </div>
-                    <div class="stat-box stat-clickable" onclick="openInfoModal('location')"
-                        title="Click to learn more">
-                        <div class="stat-num">PH</div>
-                        <div class="stat-label">Based in Quezon City</div>
-                        <div class="stat-hint">Philippines · tap for details</div>
+                    <div class="stat-box stat-clickable" onclick="openInfoModal('certifications')" title="Click to learn more">
+                        <div class="stat-num"><i class='bx bx-badge-check' style="font-size:2rem;color:var(--accent)"></i></div>
+                        <div class="stat-label">ITS Certified</div>
+                        <div class="stat-hint">HTML/CSS &amp; Cybersecurity</div>
                     </div>
                     <div class="stat-box stat-clickable" onclick="openInfoModal('experience')"
                         title="Click to learn more">
@@ -1936,11 +2291,11 @@
                     <div class="service-cta">Details →</div>
                 </div>
                 <div class="service-card" data-reveal="up" data-delay="450" onclick="openModal(6)">
-                    <div class="service-icon"><i class='bx bx-calendar-check'></i></div>
+                    <div class="service-icon"><i class='bx bx-code-alt'></i></div>
                     <div class="service-num">06</div>
-                    <div class="service-title">Appointment Setter</div>
-                    <div class="service-peek">Prospecting leads, booking qualified calls &amp; managing your
-                        scheduling pipeline end-to-end.</div>
+                    <div class="service-title">Web Development</div>
+                    <div class="service-peek">Building modern, responsive, and performance-optimized websites using
+                        clean code and SEO best practices.</div>
                     <div class="service-cta">Details →</div>
                 </div>
             </div>
@@ -1971,6 +2326,66 @@
                         announcements, public service tracking, and community resources for residents.</p>
                     <div class="project-link-row">Visit Project <i class='bx bx-link-external project-arrow'></i></div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications">
+        <div class="container">
+            <div data-reveal="up">
+                <p class="section-label">Verified Credentials</p>
+                <h2 class="section-title">Official Certifications</h2>
+                <p class="section-desc" style="max-width:640px;color:var(--ink-2);margin-top:12px;margin-bottom:36px;font-size:1rem;line-height:1.7;">
+                    Industry-recognized Information Technology Specialist (ITS) certifications issued by Certiport, validating expertise in Web Development and Cybersecurity.
+                </p>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card" data-reveal="left" onclick="openCertModal('htmlcss')">
+                    <div class="cert-img-wrap">
+                        <img src="certifications/htmlcss-cert.png" alt="ITS HTML and CSS Certification">
+                        <div class="cert-overlay">
+                            <span class="cert-zoom-btn"><i class='bx bx-zoom-in'></i> View Certificate</span>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <span class="cert-tag">ITS Certified · Certiport</span>
+                            <span class="cert-badge-pill"><i class='bx bx-code-curly'></i> HTML &amp; CSS</span>
+                        </div>
+                        <h3 class="cert-title">Information Technology Specialist — HTML &amp; CSS</h3>
+                        <p class="cert-desc">
+                            Demonstrates fundamental web development proficiency including semantic HTML5 markup, responsive layout design, CSS3 styling, accessibility, and web standards.
+                        </p>
+                        <div class="cert-footer">
+                            <span><i class='bx bx-check-shield' style="color:var(--accent);margin-right:4px;"></i> Verified Credential</span>
+                            <span class="cert-link-text">Click to View PNG <i class='bx bx-expand-alt'></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-reveal="right" data-delay="100" onclick="openCertModal('cybersec')">
+                    <div class="cert-img-wrap">
+                        <img src="certifications/cyber sec- cert .png" alt="ITS Cybersecurity Certification">
+                        <div class="cert-overlay">
+                            <span class="cert-zoom-btn"><i class='bx bx-zoom-in'></i> View Certificate</span>
+                        </div>
+                    </div>
+                    <div class="cert-content">
+                        <div class="cert-header">
+                            <span class="cert-tag">ITS Certified · Certiport</span>
+                            <span class="cert-badge-pill"><i class='bx bx-shield-quarter'></i> Cybersecurity</span>
+                        </div>
+                        <h3 class="cert-title">Information Technology Specialist — Cybersecurity</h3>
+                        <p class="cert-desc">
+                            Validates comprehensive knowledge in threat analysis, network security fundamentals, operational security protocols, data protection, and risk mitigation strategies.
+                        </p>
+                        <div class="cert-footer">
+                            <span><i class='bx bx-check-shield' style="color:var(--accent);margin-right:4px;"></i> Verified Credential</span>
+                            <span class="cert-link-text">Click to View PNG <i class='bx bx-expand-alt'></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -2104,6 +2519,28 @@
                 <i class='bx bx-download'></i> Download Now
             </a>
             <p id="rdl-note">File will download automatically</p>
+        </div>
+    </div>
+
+    <!-- Certificate Lightbox Modal -->
+    <div id="cert-lightbox" role="dialog" aria-modal="true" aria-labelledby="cert-lightbox-title">
+        <div id="cert-lightbox-blur" onclick="closeCertModal()"></div>
+        <div id="cert-lightbox-box">
+            <div id="cert-lightbox-header">
+                <h3 id="cert-lightbox-title">Certification Viewer</h3>
+                <button id="cert-lightbox-close" onclick="closeCertModal()" aria-label="Close">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div id="cert-lightbox-body">
+                <img id="cert-lightbox-img" src="" alt="Certificate PNG">
+            </div>
+            <div id="cert-lightbox-footer">
+                <span id="cert-lightbox-issuer" style="font-size:.85rem;color:var(--ink-2);"><i class='bx bx-award' style="color:var(--accent)"></i> Issued by Certiport / Pearson VUE</span>
+                <a id="cert-lightbox-dl" href="#" target="_blank" class="btn btn-gold" style="font-size:.8rem;padding:8px 18px;text-decoration:none;">
+                    <i class='bx bx-download'></i> Download Certificate PNG
+                </a>
+            </div>
         </div>
     </div>
 
@@ -2270,6 +2707,7 @@
                 document.getElementById('nl-1'),
                 document.getElementById('nl-2'),
                 document.getElementById('nl-3'),
+                document.getElementById('nl-4'),
                 document.getElementById('nav-cta'),
             ];
             navItems.forEach((el, i) => {
@@ -2311,7 +2749,7 @@
         /* ══════════════════════════════════
            6. SECTION INDICATOR DOTS
         ══════════════════════════════════ */
-        const sectionIds = ['home', 'about', 'services', 'portfolio', 'contact'];
+        const sectionIds = ['home', 'about', 'services', 'portfolio', 'certifications', 'contact'];
         const sDots = document.querySelectorAll('.s-dot');
 
         const dotObserver = new IntersectionObserver(entries => {
@@ -2419,13 +2857,13 @@
                 ]
             },
             6: {
-                icon: 'bx-calendar-check', title: 'Appointment Setter',
-                sub: 'Filling your calendar with qualified prospects so you can focus on closing.',
+                icon: 'bx-code-alt', title: 'Web Development',
+                sub: 'Designing and building custom, responsive, and high-performing web solutions.',
                 items: [
-                    { h: 'Lead Prospecting', b: 'Identifying and researching ideal prospects through LinkedIn, email lists, and CRM databases.' },
-                    { h: 'Outreach & Follow-Up', b: 'Sending personalised cold emails, DMs, or calls and following up until a booking is secured.' },
-                    { h: 'Calendar Management', b: 'Scheduling confirmed calls directly into your calendar with reminders and no-show follow-ups.' },
-                    { h: 'Pipeline Tracking', b: 'Logging every touchpoint in your CRM and reporting daily on booked vs. pending appointments.' },
+                    { h: 'Frontend Development', b: 'Building responsive, interactive, and visually stunning user interfaces using modern CSS and JavaScript.' },
+                    { h: 'Fullstack Web Apps', b: 'Creating custom web applications with secure databases, robust server-side logic, and seamless API integrations.' },
+                    { h: 'Performance & SEO', b: 'Optimizing page load speeds, structures, and accessibility to maximize search visibility and user retention.' },
+                    { h: 'E-commerce & CMS', b: 'Customizing and managing platforms like Shopify and WordPress, or building headless e-commerce solutions.' },
                 ]
             },
         };
@@ -2486,7 +2924,7 @@
                 icon: 'bx-buildings',
                 title: 'University of the East — Manila',
                 sub: 'Quezon City, Philippines',
-                photo: '',          // ← paste your school image path here, e.g. 'PERSONAL/ue_campus.jpg'
+                photo: 'IMG/UECAMP.jpg',          // ← paste your school image path here, e.g. 'PERSONAL/ue_campus.jpg'
                 photoAlt: 'UE Manila Campus',
                 tags: [
                     { text: 'Quezon City', gold: false },
@@ -2495,15 +2933,18 @@
                     { text: 'CHED Recognized', gold: true },
                 ],
                 body: [
-                    'The University of the East (UE) is one of the Philippines\' leading private universities, known for its excellence in science, technology, and business programs.',
-                    '[ You can add more details about your school experience here — e.g., campus life, achievements, organizations joined, etc. ]',
+                    'UE is a leading private university in the Philippines, known for its strong programs in science, technology, and business.',
+                    'Earned my BSIT degree from UE Manila, focusing on software development, database systems, and IT infrastructure management.',
+                    'Key coursework: Data Structures, Database Systems, Web Development, IT Security, etc.',
+                    'Mention any academic achievements, honors, organizations, or projects you’re proud of — e.g.,Dean’s Lister, programming contest wins, tech club involvement, capstone project, etc.',
+                    'UE provided a solid foundation in both technical skills and professional values.'
                 ]
             },
             course: {
                 icon: 'bx-laptop',
                 title: 'Bachelor of Science in Information Technology',
                 sub: 'BSIT · University of the East, Manila',
-                photo: '',          // ← paste your diploma or course image path here
+                photo: 'IMG/8.jpg',          // ← paste your diploma or course image path here
                 photoAlt: 'BSIT Diploma',
                 tags: [
                     { text: 'BSIT', gold: true },
@@ -2512,14 +2953,13 @@
                 ],
                 body: [
                     'Completed a four-year degree in Information Technology, building a strong foundation in software development, networking, database management, and systems analysis.',
-                    '[ You can describe your specializations, major projects, thesis topic, or key subjects here. ]',
                 ]
             },
             location: {
                 icon: 'bx-map-pin',
                 title: 'Based in Quezon City',
                 sub: 'Philippines · Available Worldwide',
-                photo: '',          // ← paste a location/city image here
+                photo: 'IMG/UE2.JPG',          // ← paste a location/city image here
                 photoAlt: 'Quezon City',
                 tags: [
                     { text: 'Quezon City', gold: false },
@@ -2529,14 +2969,13 @@
                 ],
                 body: [
                     'Currently based in Quezon City, Philippines — operating fully remote and available to clients and businesses worldwide.',
-                    '[ You can add more about your timezone, preferred working hours, or communication tools you use here. ]',
                 ]
             },
             experience: {
                 icon: 'bx-id-card',
                 title: 'Internship — School Division Office of Quezon City',
                 sub: 'Quezon City Division · Department of Education',
-                photo: '',          // ← paste your internship / office photo here e.g. 'PERSONAL/internship.jpg'
+                photo: 'IMG/SDO.jpg',          // ← paste your internship / office photo here e.g. 'PERSONAL/internship.jpg'
                 photoAlt: 'School Division Office of Quezon City',
                 tags: [
                     { text: 'Internship', gold: true },
@@ -2546,16 +2985,50 @@
                 ],
                 body: [
                     'Completed my internship at the School Division Office of Quezon City under the Department of Education, gaining real-world exposure to government administrative processes and IT operations.',
-                    '[ Add your internship details here — department assigned, tasks performed, duration, supervisor, key learnings, etc. ]',
+                    'Work as an Web developer at the HR-NON TEACHING DEPARTMENT, Develop the AR system [Attendance monitoring System] of the department. ',
+                ]
+            },
+            certifications: {
+                icon: 'bx-badge-check',
+                title: 'Professional Certifications',
+                sub: 'Information Technology Specialist (ITS) · Certiport',
+                photos: [
+                    { src: 'certifications/htmlcss-cert.png', label: 'HTML & CSS' },
+                    { src: 'certifications/cyber sec- cert .png', label: 'Cybersecurity' },
+                ],
+                tags: [
+                    { text: 'ITS Certified', gold: true },
+                    { text: 'HTML & CSS', gold: true },
+                    { text: 'Cybersecurity', gold: true },
+                    { text: 'Certiport', gold: false },
+                ],
+                body: [
+                    'Holds official Information Technology Specialist (ITS) certifications in both HTML/CSS Web Development and Cybersecurity issued by Certiport.',
+                    'Demonstrates proven technical competency in modern web structure, responsive design, network security, risk management, and system protection.'
                 ]
             },
         };
 
         function openInfoModal(key) {
             const d = infoCards[key];
-            const photoHtml = d.photo
-                ? `<div class="info-modal-photo"><img src="${d.photo}" alt="${d.photoAlt}"></div>`
-                : `<div class="info-modal-photo"><span class="info-modal-photo-label">📷 Add your photo here<br><small style="opacity:.6">${d.photoAlt}</small></span></div>`;
+
+            // Build photo section — scrollable strip for multiple photos, single for one
+            let photoHtml = '';
+            if (d.photos && d.photos.length > 0) {
+                const items = d.photos.map(p =>
+                    `<div class="cert-photo-item">
+                        <img src="${p.src}" alt="${p.label} Certificate" onclick="openCertModal('${key === 'certifications' ? (p.label.includes('CSS') ? 'htmlcss' : 'cybersec') : ''}')">
+                        <div class="cert-photo-label">${p.label}</div>
+                    </div>`
+                ).join('');
+                photoHtml = `
+                    <div class="cert-photo-strip">${items}</div>
+                    <p class="cert-strip-hint"><i class='bx bx-mouse' style="font-size:1rem"></i> Scroll sideways to see both certificates &nbsp;&middot;&nbsp; Click to enlarge</p>`;
+            } else if (d.photo) {
+                photoHtml = `<div class="info-modal-photo"><img src="${d.photo}" alt="${d.photoAlt || ''}"></div>`;
+            } else {
+                photoHtml = `<div class="info-modal-photo"><span class="info-modal-photo-label">📷 Add your photo here<br><small style="opacity:.6">${d.photoAlt || ''}</small></span></div>`;
+            }
 
             const tagsHtml = d.tags.map(t =>
                 `<span class="info-modal-tag${t.gold ? ' gold' : ''}">${t.text}</span>`
@@ -2826,12 +3299,52 @@
                 });
         }
 
+        /* ══════════════════════════════════
+           CERTIFICATION LIGHTBOX MODAL LOGIC
+        ══════════════════════════════════ */
+        const certData = {
+            htmlcss: {
+                title: 'Information Technology Specialist — HTML & CSS',
+                img: 'certifications/htmlcss-cert.png',
+                issuer: 'Certiport / Pearson VUE',
+            },
+            cybersec: {
+                title: 'Information Technology Specialist — Cybersecurity',
+                img: 'certifications/cyber sec- cert .png',
+                issuer: 'Certiport / Pearson VUE',
+            }
+        };
+
+        function openCertModal(certKey) {
+            const cert = certData[certKey];
+            if (!cert) return;
+
+            document.getElementById('cert-lightbox-title').textContent = cert.title;
+            document.getElementById('cert-lightbox-img').src = cert.img;
+            document.getElementById('cert-lightbox-img').alt = cert.title;
+            document.getElementById('cert-lightbox-dl').href = cert.img;
+            document.getElementById('cert-lightbox-dl').download = cert.img.split('/').pop();
+
+            const modal = document.getElementById('cert-lightbox');
+            modal.classList.add('cl-open');
+            requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('cl-visible')));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertModal() {
+            const modal = document.getElementById('cert-lightbox');
+            modal.classList.remove('cl-visible');
+            setTimeout(() => modal.classList.remove('cl-open'), 350);
+            document.body.style.overflow = '';
+        }
+
         // Close on Escape
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') {
                 closeModal();
                 closeResumeModal();
                 closeContactModal();
+                closeCertModal();
             }
         });
     </script>
