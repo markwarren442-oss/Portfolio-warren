@@ -14,20 +14,22 @@ export default function ResumeModal({ isOpen, onClose }) {
   const confettiAnimRef = useRef(null);
 
   const triggerDownload = useCallback(() => {
-    fetch('CV_MarkWarren_Flores.pdf')
+    const fileName = 'MARK WARREN L -RESUME.pdf';
+    const fileUrl = encodeURI(fileName);
+    fetch(fileUrl)
       .then((r) => r.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'CV_MarkWarren_Flores.pdf';
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
       })
       .catch(() => {
-        window.open('CV_MarkWarren_Flores.pdf', '_blank');
+        window.open(fileUrl, '_blank');
       });
   }, []);
 
